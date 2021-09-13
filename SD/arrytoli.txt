@@ -1,0 +1,80 @@
+#include<stdio.h>
+#include<alloc.h>
+typedef struct stack
+	{
+		char data;
+		struct stack *link;
+	}STACK;
+void push(STACK**,char);
+char pop(STACK**);
+void display(STACK*);
+void main()
+	{
+		STACK *s=NULL;
+		int i=0,j=0;
+		char array1[100],array2[100];//*array="";
+printf(“\n Enter array”);		
+gets(array1);
+		//puts(array);
+		printf("\n LINKED LIST \n");
+		while(array1[i]!='\0')
+			{
+				push(&s,array1[i]);
+				i++;
+			}
+		display(s);
+		i=0;
+		while(array1[i]!='\0')
+			{
+				array2[j]=pop(&s);
+				j++;
+				i++;
+			}
+		array2[j]='\0';
+		printf("\n");
+		puts(array2);
+		/*for(j=0;j!=i;j++)
+			{
+				printf("%c",array2[j]);
+			} */
+	}
+void push(STACK**s,char item)
+	{
+
+	 STACK *temp,*r;
+	 if(*s==NULL)
+	 {
+		temp=(STACK*)malloc(sizeof(STACK));
+		temp->data=item;
+		temp->link=NULL;
+		*s=temp;
+	 }
+	 else
+	 {
+		temp=*s;
+		while(temp->link!=NULL)
+			temp=temp->link;
+		r=(STACK*)malloc(sizeof(STACK));
+		r->data=item;
+		r->link=NULL;
+		temp->link=r;
+	 }
+}
+void display(STACK*q)
+{
+	while(q!=NULL)
+	{
+		printf("%c",q->data);
+		q=q->link;
+	}
+}
+char pop(STACK**x)
+	{
+		char c;
+		STACK *ptr;
+		ptr=*x;
+		c=(*x)->data;
+		*x=(*x)->link;
+		return c;
+		free(ptr);
+	}

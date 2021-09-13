@@ -1,0 +1,147 @@
+
+#include "iostream.h"
+#include <conio.h>
+#define null 0
+
+template<class t>
+class node
+{
+  t coeff;
+  int expo;
+  node<t> *next;
+  public:
+	  node(){}
+	  void createlist(node<t> &head);
+	  void display(node<t> &head);
+	  node<t>  polymul(node<t> &head1,node<t> &head2);
+     void attached(node<t> *p,node<t> &head3);
+};
+
+
+template<class t>
+void node<t>::createlist(node<t> &head)
+{
+node<t> *ptr1;
+node<t> *ptr2=null;
+t x;
+int e;
+head.next=null;
+cout<<"\nEnter coefficient :(0 for none)";
+cin>>x;
+cout<<"\nEnter exponent :";
+cin>>e;
+
+while(x!=0)
+{
+ ptr1=new node;
+ ptr1->coeff=x;
+ ptr1->expo=e;
+ ptr1->next=null;
+ if(head.next==null)
+	 head.next=ptr1;
+ else
+	 ptr2->next=ptr1;
+  ptr2=ptr1;
+
+  cout<<"\nEnter another coefficient:(0 for none)\n";
+  cin>>x;
+  cout<<"\nEnter exponent :\n";
+  cin>>e;
+}
+}
+
+template<class t>
+void node<t>::display(node<t> &head)
+{
+ node<t> *ptr;
+ ptr=head.next;
+ if (ptr != null)
+	cout<<"  "<<ptr->coeff<<"X^"<<ptr->expo;
+ ptr=ptr->next;
+ while(ptr!=null)
+  {
+	if (ptr->coeff > 0)
+		cout<<" + "<<ptr->coeff<<"X^"<<ptr->expo;
+	else
+		cout<<" "<<ptr->coeff<<"X^"<<ptr->expo;
+
+	ptr=ptr->next;
+  }
+}
+
+template<class t>
+ void node<t>::attached(node<t> *p,node<t> &head3)
+	{
+	  node<t> *ptr1,*ptr2;
+	  if (head3.next==null)
+		  {
+			head3.next=p;
+			return;
+		  }
+	  ptr2=head3.next;
+	  ptr1=ptr2->next;
+	  while(ptr1 != null)
+		 {
+		  if (p->expo > ptr1->expo)
+			 {
+			  p->next=ptr1;
+			  ptr2->next=p;
+			  return;
+			 }
+		  else if (p->expo == ptr1->expo)
+			  {
+				ptr1->coeff=ptr1->coeff + p->coeff;
+				return;
+			  }
+		  ptr2=ptr1;
+		  ptr1=ptr1->next;
+		 }
+		 ptr2->next=p;
+	 }
+
+
+template<class t>
+node<t> node<t>::polymul (node<t> &head1,node<t> &head2)
+{
+node<t> *ptr1,*ptr2,*ptr;
+node<t> head3;
+ptr2=head2.next;
+head3.next=null;
+while (ptr2 != null)
+{
+  ptr1=head1.next;
+  while (ptr1 != null)
+	  {
+		ptr=new node<t>;
+		ptr->expo=ptr1->expo + ptr2->expo;
+		ptr->coeff=ptr1->coeff * ptr2->coeff;
+		ptr->next=null;
+		attached(ptr,head3);
+		ptr1=ptr1->next;
+	  }  //end of while
+	 ptr2=ptr2->next;
+  }
+ return head3;
+}
+
+
+void main()
+{
+clrscr();
+node<int> head1,head2,head3,m;
+//node<int>head3;
+
+m.createlist(head1);
+cout<<"\n\n1st list is....\n\n";
+m.display(head1);
+
+m.createlist(head2);
+cout<<"\n\n2nd list is....\n\n";
+m.display(head2);
+
+
+cout<<"\n\nList after multiplication is....\n\n";
+ head3=m.polymul(head1,head2);
+ m.display(head3);
+getch();
+}

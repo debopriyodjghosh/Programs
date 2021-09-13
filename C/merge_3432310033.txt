@@ -1,0 +1,118 @@
+/*   Roll No-3432-31-0033,  Registration no-432-1221-0092-13  */
+
+/*      program-sorting of an array of integers using merge sort technique    */
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+/*   functions declaration   */
+
+void msort(int x[20],int l,int h);
+void merge(int x[20],int l,int mid,int h); 
+
+void main()
+{
+	 int a[20],i,n;
+	 printf("\n enter no of elements:");
+	 scanf("%d",&n);
+
+/*  input elements of the array  */
+
+	 for(i=0; i<n; i++)
+	 {
+		  printf("\n a[%d]=",i);
+		  scanf("%d",&a[i]);
+
+	 }
+
+	 msort(a,0,n-1);
+
+/*   display of the array elements  */
+
+	 printf("\n sorted list\n");
+	 for(i=0; i<n; i++)
+	 {
+		  printf("%5d",a[i]);
+	 }
+
+}
+
+void msort(int x[20],int l,int h)
+{
+	int mid;
+    if(l<h)
+	{
+		mid=(l+h)/2;
+		msort(x,l,mid);
+		msort(x,mid+1,h);
+		merge(x,l,mid,h);
+	}
+	
+}
+
+void merge(int x[20],int l,int mid,int h)
+{
+	int i,j,k,z[20];   
+	i=l;          
+	j=mid+1;
+	k=0;          //k is the index of the array z
+
+	while(i<=mid && j<=h)
+	{
+		if(x[i]<x[j])
+		{
+			z[k]=x[i];
+			i++;
+		}
+		else
+		{
+			z[k]=x[j];
+			j++;
+		}
+		k++;
+	}
+
+	while(i<=mid)
+	{
+		z[k]=x[i];
+		i++;
+		k++;
+	}
+
+	while(j<=h)
+	{
+		z[k]=x[j];
+		j++;
+		k++;
+	}
+
+	i=l;
+
+/*   storing elements of the array z into the array  x  */
+
+	for(j=0; j<k; j++)
+	{
+		x[i]=z[j];
+		i++;
+	}
+}
+
+
+Output:
+
+
+ enter no of elements:5
+
+ a[0]=9
+
+ a[1]=-6
+
+ a[2]=4
+
+ a[3]=-87
+
+ a[4]=-2
+
+ sorted list
+  -87   -6   -2    4    9Press any key to continue

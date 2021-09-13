@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+int n,i;
+float a[30],x,sum;
+clrscr();
+printf("Enter the val ue of \'n\'\n");
+scanf("%d",&n);
+printf("Enter \'n+1\' values\n");
+for(i=0;i<=n;i++)
+scanf("%f",&a[i]);
+printf("Enter the values of x\n");
+scanf("%f",&x);
+sum=a[n]*x;
+for(i=n-1;i>0;i--)
+sum=(sum+a[i])*x;
+sum=sum+a[0];
+printf("Evaluated result = %f \n",sum);
+getche();
+}
+

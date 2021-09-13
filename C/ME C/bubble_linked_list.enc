@@ -1,0 +1,98 @@
+// Bubble short on Linked list
+
+// Header files
+#include<stdio.h>
+#include<stdlib.h>
+
+// Strcuture of the linked list
+typedef struct node
+{
+	int x;
+	struct node *next;
+}node;
+
+// Global declaration of head pointer of the linked list
+node *h;
+
+// A function to create node of the linked list
+node *getnode(int x)
+{
+	node *p;
+	p=(node*)malloc(sizeof(node));
+	p->x=x;
+	p->next=NULL;
+	return(p);
+}
+
+// A function to create a linked list
+void create_list()
+{
+	int x;
+	char ch;
+	node *p,*q;
+	h=q=NULL;
+	do
+	{
+		printf("\nEnter The Number:");
+		scanf("%d",&x);
+		p=getnode(x);
+		if(h==NULL)
+		 h=q=p;
+  		else
+  		{
+   			q->next=p;
+		    q=p;
+  		}
+  		printf("Do you want to continew(y/n):");
+  		fflush(stdin);
+  		ch=getche();
+ 	}while(ch=='Y'||ch=='y');
+}
+
+// A function for display the linked list
+void display()
+{
+	node *q;
+	q=h;
+	printf("\nElements are:- ");
+	while(q!=NULL)
+	{
+		printf("%d ",q->x);
+		q=q->next;
+ 	}
+}
+
+// A funtion for sort the elements of linked list by bubble sort method
+bubble_sort()
+{
+	node *p;
+	int n,temp;
+	do
+	{
+		n=0;
+		p=h;
+		while((p->next)!=NULL)
+		{
+			if((p->x)>((p->next)->x))
+			{
+				temp=p->x;
+				p->x=p->next->x;
+				(p->next)->x=temp;
+				n=1;
+			}
+			p=p->next;
+		}
+	}while(n);
+}
+
+// MAIN FUNCTION
+main()
+{
+	printf(":: ENTER THE ELEMNETS FOR SORT ::");
+	create_list();
+	printf("\n:: ELEMENTS ARE ::");
+	display();
+	bubble_sort();
+	printf("\n:: ELENETS AFTER SORTING::");
+	display();
+}

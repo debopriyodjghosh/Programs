@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+int main()
+{
+	int i,j,l,c,x;
+	printf("All Non-Prime number within 1-100 is >>\n\n");
+	for(i=1;i<=100;i++)
+	{
+		for(j=2;j<i;j++)
+		{
+			c=0;
+			if(i%j==0)
+		    {
+			c=1;
+		    break;
+		    }
+		}
+		if(c==1)
+		printf("%d ",i);
+	}
+	printf("\n\nAll Non-Fibonacci number within 1-100 is >>\n\n");
+	i=0;
+	j=1;
+	l=0;
+	while(l<=100)
+	{
+		l=i+j;
+		i=j;
+		j=l;
+		c=i+j;
+		for(x=l+1;x<c;x++)
+		{
+		if(x<=100)
+		printf("%d ",x);
+		else
+		break;
+	    }
+	}
+	getch();
+}

@@ -1,0 +1,62 @@
+//****INVERSE OF MATRIX using GAUSS JORDAN METHOD****//
+#include<stdio.h>
+#include<math.h>
+
+main()
+{
+  float a[10][10],b[10][10],r;
+  int i,j,k,n;
+
+  printf("\t\t\tEnter the order of matrix:");
+  scanf("%d",&n);
+  printf("\t\tEnter the matrix :\n");
+  
+  //take matrix from user
+  for(i=0;i<n;i++)     
+    {
+    for(j=0;j<n;j++)
+      {
+        printf("\t\ta[%d][%d]=",i,j);
+        scanf("%f",&a[i][j]);
+      }
+    }
+   for(i=0;i<n;i++)   //initialize of unit matrix
+    {
+    for(j=0;j<=n;j++)          
+      {                        
+      	if(i==j)              //diagonal elements of unit matrix is 1
+           b[i][j]=1.0;
+        else   
+           b[i][j]=0.0;       //non diagonal elements of unit matrix is 0
+      }
+    }
+    //GAUSS JORDAN method starts here
+   for(k=0;k<n;k++)
+   {
+   	for(i=0;i<n;i++)
+   	{
+   	    if(i==k)
+   	        continue;
+   	    r=a[i][k]/a[k][k];   
+   	    for(j=0;j<n;j++)
+   	    {
+   	  	    a[i][j]=a[i][j]-r*a[k][j];
+   	    	b[i][j]=b[i][j]-r*b[k][j];
+	    }
+	}
+   }
+   for(i=0;i<n;i++)
+   {
+   	for(j=0;j<n;j++)
+   	 b[i][j]=b[i][j]/a[i][i];
+   }
+   printf("\n\t\t\t::INVERSE MATRIX IS::\n");
+   for(i=0;i<n;i++)
+   {
+   	for(j=0;j<n;j++)
+   	 printf("\t%.2f ",b[i][j]);
+   	printf("\n"); 
+   }
+   return 0;
+}
+

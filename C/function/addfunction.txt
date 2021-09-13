@@ -1,0 +1,21 @@
+//C Program for Addition of  Two Number's using User Define Function
+#include<stdio.h>
+#include<conio.h>
+float add(float,float);
+void main()
+{
+
+float a,b,c;
+clrscr();
+printf("Enter the value for a & b\n\n");
+scanf("%f%f",&a,&b);
+c=add(a,b);
+printf("\nc=%f",c);
+getch();
+}
+float add(float x,float y)
+{
+float z;
+z=x+y;
+return(z);
+}

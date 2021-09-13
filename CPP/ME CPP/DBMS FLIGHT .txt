@@ -1,0 +1,135 @@
+        
+
+ create table flight_akash
+(
+F_no varchar2(6),
+company varchar2(20),
+primary key(F_no)
+);
+
+   insert into flight_akash values('F1000','AIR_INDIA')
+   insert into flight_akash values('F1100','SPICE_JET')
+   insert into flight_akash values('F1150','INDICO')
+   insert into flight_akash values('F1200','AIR_INDIA')
+   insert into flight_akash values('F1250','SPICE_JET')
+   insert into flight_akash values('F1300','EMIRATES')
+
+
+ select * from flight_akash
+
+F_NO	COMPANY
+F1000	AIR_INDIA
+F1100	SPICE_JET
+F1150	INDICO
+F1200	AIR_INDIA
+F1250	SPICE_JET
+F1300	EMIRATES
+
+
+
+create table pilot_akash
+(
+p_id varchar2(6),
+p_name varchar2(20),
+experience number(4),
+phone varchar2(20),
+salary number(10),
+primary key(p_id)
+);
+
+
+
+   insert into pilot_akash values('P1','A.K.MALLIK',10,'9135256610',90000)
+   insert into pilot_akash values('P2','T.B.KHATUYA',12,'9850321465',150000)
+   insert into pilot_akash values('P3','B.C ROY',8,'8335256250',80000)
+   insert into pilot_akash values('P4','S.K.DAS',10,'9836256610',90000)
+   insert into pilot_akash values('P5','M.K.MISHRA',9,'9935252510',90500)
+   insert into pilot_akash values('P6','P.K.ROY',10,'8993525660',100000)
+
+select* from pilot_akash ;
+
+ P_ID	  P_NAME	        EXPERIENCE	  PHONE	                 SALARY
+ P1	A.K.MALLIK              10	9135256610	90000
+ P2	T.B.KHATUYA            12	9850321465	150000
+ P3	B.C ROY	                 8	8335256250	80000
+ P4	S.K.DAS	                 10              9836256610	90000
+ P5	M.K.MISHRA            9	9935252510	90500
+ P6	P.K.ROY	                 10	8993525660	100000
+
+
+
+ create table schedule_akash
+(
+f_no varchar2(6),
+p_id varchar2(6),
+source_city varchar2(20),
+destination_city varchar2(20),
+schedule_date date,
+primary key(f_no,p_id)
+);
+
+
+
+insert into schedule_akash values('F1100','P1','KOLKATA','BANGALOR','15-JAN-2016')
+insert into schedule_akash values('F1150','P2','KOLKATA','JAIPUR','01-JAN-2016')
+insert into schedule_akash values('F1000','P3','JAIPUR','NEW_DELHI','02-JAN-2016')
+insert into schedule_akash values('F1200','P4','MUMBAI','KOLKATA','12-FEB-2016')
+insert into schedule_akash values('F1250','P3','JAIPUR','NEW_DELHI','17-DEC-2016')
+insert into schedule_akash values('F1300','P5','NEW_DELHI','KOLKATA','03-MAR-2016')
+insert into schedule_akash values('F1300','P6','NEW_DELHI','KOLKATA','02-FEB-2016')
+insert into schedule_akash values('F1000','P2','KOLKATA','ODISHA','20-JAN-2016')
+
+
+  select *from schedule_akash
+
+
+F_NO	P_ID	SOURCE_CITY	DESTINATION_CITY	                      SCHEDULE_DATE
+F1100	P1	KOLKATA	                  BANGALOR	                             15-JAN-16
+F1150	P2	KOLKATA	                  JAIPUR	                                               01-JAN-16
+F1000	P3	JAIPUR	                  NEW_DELHI	                             02-JAN-16
+F1200	P4	MUMBAI	                  KOLKATA	                                               12-FEB-16
+F1250	P3	JAIPUR	                  NEW_DELHI	                             17-DEC-16 
+F1300	P5	NEW_DELHI	KOLKATA	                                               03-MAR-16
+F1300	P6	NEW_DELHI	KOLKATA	                                               02-FEB-16
+F1000	P2	KOLKATA	                 ODISHA	                                               20-JAN-16
+
+
+
+
+A.     select f.f_no,f.company from flight_akash f,pilot_akash p,schedule_akash s where f.f_no=s.f_no and p.p_id=s.p_id and salary in(select max(salary)        from pilot_akash )and to_char(schedule_date,'MON')='JAN' and to_char(schedule_date,'YYYY')='2016' ;
+
+
+
+                                                  F_NO	COMPANY
+                                                  F1150	INDICO
+                                                  F1000	AIR_INDIA
+
+
+
+
+
+
+
+B.     select f.f_no,f.company from flight_akash f,schedule_akash s where f.f_no=s.f_no and s.source_city='NEW_DELHI' and                 S.DESTINATION_CITY='KOLKATA'
+
+          
+
+            F_NO          COMPANY
+             F1300	EMIRATES
+             F1300	EMIRATES
+ 
+
+
+C.     update pilot_akash set phone='0919000500095' where p_name='M.K.MISHRA'
+
+          
+P_ID	P_NAME	         EXPERIENCE	                   PHONE	                SALARY
+P1	A.K.MALLIK	10	                 9135256610	90000
+P2	T.B.KHATUYA	12	                 9850321465	150000
+P3	B.C ROY	                   8	                 8335256250	80000
+P4	S.K.DAS	                  10	                 9836256610	90000
+P5	M.K.MISHRA	 9	                 0919000500095	90500
+P6	P.K.ROY	                  10	                 8993525660	100000
+
+
+

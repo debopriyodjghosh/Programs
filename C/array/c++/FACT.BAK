@@ -1,0 +1,26 @@
+/*C++ Program for Factorial of a Number using Recursive Function */
+#include<iostream.h>
+#include<conio.h>
+long int factorial(int n);
+int main()
+{
+int n;
+clrscr();
+cout<<"Enter the number:\n\n";
+cin>>n;
+cout<<"Factorial is="<<factorial(n);
+getch();
+return 0;
+}
+long int factorial(int n)
+{
+if(n<=1)
+{
+return 1;
+}
+else
+{
+n=n*factorial(n-1);
+return n;
+}
+}
